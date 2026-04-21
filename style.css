@@ -23,7 +23,9 @@ body {
 
 body {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--text);
   background:
@@ -70,10 +72,11 @@ body {
   position: relative;
   z-index: 2;
   min-height: 100vh;
+  min-height: 100svh;
   display: grid;
-  align-items: end;
+  align-items: center;
   gap: 1.5rem;
-  padding: 2rem 1.25rem calc(2rem + env(safe-area-inset-bottom));
+  padding: max(1.5rem, env(safe-area-inset-top)) 1.25rem calc(2rem + env(safe-area-inset-bottom));
 }
 
 .hero-copy {
@@ -368,15 +371,109 @@ body {
 
 @media (max-width: 430px) {
   .experience-shell {
-    padding-inline: 1rem;
+    align-items: start;
+    gap: 1.25rem;
+    padding: max(1rem, env(safe-area-inset-top)) 1rem calc(1.5rem + env(safe-area-inset-bottom));
   }
 
   .hero-copy h1 {
-    max-width: 10ch;
+    max-width: 11ch;
+    font-size: clamp(2.1rem, 10vw, 3rem);
+    line-height: 0.98;
+  }
+
+  .intro-text {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .player-container {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1.35rem;
+  }
+
+  .player-meta {
+    gap: 0.45rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .meta-chip {
+    min-height: 1.8rem;
+    padding: 0.18rem 0.65rem;
+    font-size: 0.6rem;
+  }
+
+  .player-artwork {
+    margin-bottom: 1rem;
+  }
+
+  .artwork-ring {
+    width: min(78vw, 16rem);
+  }
+
+  .player-artwork img {
+    width: min(68vw, 13.5rem);
+    border-radius: 1.2rem;
+  }
+
+  .player-info h2 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .player-info p {
+    font-size: 0.9rem;
+  }
+
+  .controls {
+    gap: 0.6rem;
+    margin: 1.15rem 0 0.85rem;
   }
 
   .text-btn {
-    min-width: 4.5rem;
-    padding-inline: 0.75rem;
+    min-width: 4.1rem;
+    padding: 0.72rem 0.6rem;
+    font-size: 0.72rem;
+  }
+
+  .play-btn {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .button-icon {
+    width: 1.55rem;
+    height: 1.55rem;
+  }
+
+  #seek-slider {
+    margin-bottom: 0.65rem;
+  }
+
+  .supporting-note {
+    font-size: 0.58rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-height: 760px) and (max-width: 740px) {
+  .experience-shell {
+    align-items: start;
+  }
+
+  .hero-copy {
+    padding-top: 0.25rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .intro-text {
+    margin-top: 0.75rem;
+  }
+
+  .player-artwork img {
+    width: min(56vw, 12rem);
   }
 }
