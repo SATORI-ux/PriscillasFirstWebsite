@@ -35,7 +35,7 @@ const seekSlider = document.getElementById("seek-slider");
 // Example Track List (Local Files)
 const tracks = [
   {
-    title: "bliss",
+    title: "Her Purr",
     artist: "Priscilla Anastasia",
     src: "audio/track1.mp3"
   }

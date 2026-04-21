@@ -2,103 +2,79 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Mobile-first Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Mobile Music Player</title>
-
-  <!-- Link to CSS -->
+  <title>Priscilla Playlist</title>
   <link rel="stylesheet" href="style.css" />
-
-  <!-- iOS Safari Web App Meta (optional) -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 </head>
 <body>
-
-  <!-- Slideshow Container -->
-  <div class="slideshow-container">
-    <!-- Slide 1 (active by default) -->
-    <div class="slide active"
-      style="background-image: url('images/slide1.png');">
-    </div>
-	 <!-- Slide 2 -->
-    <div class="slide"
-      style="background-image: url('images/slide2.jpg');">
-    </div>
-    <!-- Slide 3 -->
-    <div class="slide"
-      style="background-image: url('images/slide3.png');">
-    </div>
-    <!-- Slide 4 -->
-    <div class="slide"
-      style="background-image: url('images/slide4.png');">
-    </div>
-	<!-- Slide 5 -->
-    <div class="slide"
-      style="background-image: url('images/slide5.png');">
-    </div>
-	<!-- Slide 6 -->
-    <div class="slide"
-      style="background-image: url('images/slide6.jpg');">
-    </div>
-	<!-- Slide 7 -->
-    <div class="slide"
-      style="background-image: url('images/slide7.png');">
-    </div>
-	<!-- Slide 8 -->
-    <div class="slide"
-      style="background-image: url('images/slide8.jpg');">
-    </div>
+  <div class="slideshow-container" aria-hidden="true">
+    <div class="slide active" style="background-image: url('images/slide1.png');"></div>
+    <div class="slide" style="background-image: url('images/slide2.jpg');"></div>
+    <div class="slide" style="background-image: url('images/slide3.png');"></div>
+    <div class="slide" style="background-image: url('images/slide4.png');"></div>
+    <div class="slide" style="background-image: url('images/slide5.png');"></div>
+    <div class="slide" style="background-image: url('images/slide6.jpg');"></div>
+    <div class="slide" style="background-image: url('images/slide7.png');"></div>
+    <div class="slide" style="background-image: url('images/slide8.jpg');"></div>
   </div>
 
-  <!-- Music Player -->
-  <div class="player-container">
-    <div class="player-artwork">
-      <img src="images/album-cover.jpeg" alt="Album Cover" />
-    </div>
+  <div class="page-overlay"></div>
 
-    <div class="player-info">
-      <!-- Song Title and Artist -->
-      <h2 id="song-title">Song Title</h2>
-      <p id="artist-name">Artist Name</p>
-    </div>
+  <main class="experience-shell">
+    <section class="hero-copy" aria-label="Introduction">
+      <p class="eyebrow">A small moment, kept close</p>
+      <h1>A tiny tribute to a well-loved cat and her unmistakable purr.</h1>
+      <p class="intro-text">
+        This page holds a simple recording of one peaceful moment, made to be revisited,
+        remembered, and smiled at whenever it is needed.
+      </p>
+    </section>
 
-    <!-- Audio Element -->
-    <!-- "autoplay" + "playsinline" (iOS) + optional "muted" help mobile autoplay -->
-    <audio
-      id="audio-player"
-      autoplay
-      playsinline
-      muted
-    ></audio>
+    <section class="player-container" aria-label="Music player">
+      <div class="card-glow" aria-hidden="true"></div>
 
-    <!-- Controls Container -->
-    <div class="controls">
-      <button id="prev-btn" class="control-btn">
-        <img src="icons/previous.png" alt="Previous" class="button-icon">
-      </button>
+      <div class="player-meta">
+        <span class="meta-chip">A gentle keepsake</span>
+        <span class="meta-chip meta-chip-muted">Captured with care</span>
+      </div>
 
-      <button id="play-pause-btn" class="control-btn">
-        <img src="icons/play.png" alt="Play" id="play-icon" class="button-icon active">
-        <img src="icons/pause.png" alt="Pause" id="pause-icon" class="button-icon">
-      </button>
+      <div class="player-artwork">
+        <div class="artwork-ring"></div>
+        <img src="images/album-cover.jpeg" alt="Album Cover" />
+      </div>
 
-      <button id="next-btn" class="control-btn">
-        <img src="icons/next.png" alt="Next" class="button-icon">
-      </button>
-    </div>
+      <div class="player-info">
+        <p class="section-label">Now playing</p>
+        <h2 id="song-title">Song Title</h2>
+        <p id="artist-name">Artist Name</p>
+      </div>
 
-    <!-- Slider for current song time -->
-    <input
-      type="range"
-      id="seek-slider"
-      min="0"
-      value="0"
-      step="1"
-    />
-  </div>
+      <audio id="audio-player" autoplay playsinline muted></audio>
 
-  <!-- Link to JavaScript -->
+      <div class="controls" aria-label="Playback controls">
+        <button id="prev-btn" class="control-btn text-btn" type="button" aria-label="Previous track">
+          Prev
+        </button>
+
+        <button id="play-pause-btn" class="control-btn play-btn" type="button" aria-label="Play or pause">
+          <img src="icons/play.png" alt="Play" id="play-icon" class="button-icon active" />
+          <img src="icons/pause.png" alt="Pause" id="pause-icon" class="button-icon" />
+        </button>
+
+        <button id="next-btn" class="control-btn text-btn" type="button" aria-label="Next track">
+          Next
+        </button>
+      </div>
+
+      <label class="sr-only" for="seek-slider">Track position</label>
+      <input type="range" id="seek-slider" min="0" value="0" step="1" />
+
+      <p class="supporting-note">Tap anywhere if your phone needs a first interaction before the purring begins.</p>
+    </section>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>
