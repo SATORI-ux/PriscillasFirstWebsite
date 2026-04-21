@@ -25,54 +25,40 @@
   <main class="experience-shell">
     <section class="hero-copy" aria-label="Introduction">
       <p class="eyebrow">A small moment, kept close</p>
-      <h1>A tiny tribute to a well-loved cat and her unmistakable purr.</h1>
+      <h1>A little collection of moments, with her purr at the center.</h1>
       <p class="intro-text">
-        This page holds a simple recording of one peaceful moment, made to be revisited,
-        remembered, and smiled at whenever it is needed.
+        This page holds a few quiet snapshots to revisit whenever you want to feel close to her:
+        familiar photos, a soft recording, and a small piece of everyday warmth.
       </p>
     </section>
 
-    <section class="player-container" aria-label="Music player">
+    <section class="gallery-container" aria-label="Moments gallery">
       <div class="card-glow" aria-hidden="true"></div>
 
-      <div class="player-meta">
+      <div class="gallery-meta">
         <span class="meta-chip">A gentle keepsake</span>
-        <span class="meta-chip meta-chip-muted">Captured with care</span>
+        <span class="meta-chip meta-chip-muted">A few moments in one place</span>
       </div>
 
-      <div class="player-artwork">
-        <div class="artwork-ring"></div>
-        <img src="images/album-cover.jpeg" alt="Album Cover" />
+      <div id="moments-gallery" class="moments-gallery" aria-live="polite">
       </div>
+    </section>
 
-      <div class="player-info">
-        <p class="section-label">Now playing</p>
-        <h2 id="song-title">Song Title</h2>
-        <p id="artist-name">Artist Name</p>
+    <div class="audio-overlay" aria-label="Persistent audio controls">
+      <div class="audio-overlay-copy">
+        <p id="song-title" class="overlay-title">Her Purr</p>
+        <p id="artist-name" class="overlay-subtitle">Priscilla Anastasia</p>
       </div>
 
       <audio id="audio-player" autoplay playsinline muted></audio>
 
-      <div class="controls" aria-label="Playback controls">
-        <button id="prev-btn" class="control-btn text-btn" type="button" aria-label="Previous track">
-          Prev
-        </button>
-
+      <div class="overlay-controls" aria-label="Playback controls">
         <button id="play-pause-btn" class="control-btn play-btn" type="button" aria-label="Play or pause">
           <img src="icons/play.png" alt="Play" id="play-icon" class="button-icon active" />
           <img src="icons/pause.png" alt="Pause" id="pause-icon" class="button-icon" />
         </button>
-
-        <button id="next-btn" class="control-btn text-btn" type="button" aria-label="Next track">
-          Next
-        </button>
       </div>
-
-      <label class="sr-only" for="seek-slider">Track position</label>
-      <input type="range" id="seek-slider" min="0" value="0" step="1" />
-
-      <p class="supporting-note">Tap anywhere if your phone needs a first interaction before the purring begins.</p>
-    </section>
+    </div>
   </main>
 
   <script src="script.js"></script>

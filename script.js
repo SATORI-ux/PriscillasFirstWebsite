@@ -1,93 +1,166 @@
 /*********************
- *  Slideshow Logic
+ *  Background Slides
  ********************/
 const slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
-const slideInterval = 5000; // 5 seconds
+const slideInterval = 5000;
 
 function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove("active"));
+  slides.forEach((slide) => slide.classList.remove("active"));
   slides[index].classList.add("active");
 }
 
-// Auto-advance slides
 setInterval(() => {
   currentSlide = (currentSlide + 1) % slides.length;
   showSlide(currentSlide);
 }, slideInterval);
 
-// Initialize the first slide
 showSlide(currentSlide);
 
 /*********************
- *   Music Player
+ *   Persistent Audio
  ********************/
 const audioPlayer = document.getElementById("audio-player");
-
-// Buttons
 const playPauseBtn = document.getElementById("play-pause-btn");
 const playIcon = document.getElementById("play-icon");
 const pauseIcon = document.getElementById("pause-icon");
-const nextBtn = document.getElementById("next-btn");
-const prevBtn = document.getElementById("prev-btn");
-const seekSlider = document.getElementById("seek-slider");
+const songTitle = document.getElementById("song-title");
+const artistName = document.getElementById("artist-name");
+const galleryRoot = document.getElementById("moments-gallery");
 
-// Example Track List (Local Files)
-const tracks = [
-  {
-    title: "Her Purr",
-    artist: "Priscilla Anastasia",
-    src: "audio/track1.mp3"
-  }
+const audioTrack = {
+  title: "Her Purr",
+  artist: "Priscilla Anastasia",
+  src: "audio/track1.mp3"
+};
+
+const imageAssets = [
+  "assets/slideshow-images/AlwaysLikeThis.jpg",
+  "assets/slideshow-images/BestSeatinTheHouse.jpeg",
+  "assets/slideshow-images/comfyheatingpad.JPG",
+  "assets/slideshow-images/HerFavoriteSpot.jpg",
+  "assets/slideshow-images/PrissAndHerChild.jpeg",
+  "assets/slideshow-images/RememberWhen.jpg",
+  "assets/slideshow-images/UsedToFitInMyHand.jpg",
+  "assets/slideshow-images/vogueshot.JPG",
+  "assets/slideshow-images/whyDoesSheLoveBoxes.JPG"
 ];
 
-let currentTrackIndex = 0;
+const videoAssets = [
+  "assets/slideshow-videos/bestKindOfNeedy.MP4",
+  "assets/slideshow-videos/bliss.mov",
+  "assets/slideshow-videos/Shenanigans.MP4"
+];
+
+const sizePattern = ["large", "large", "medium", "medium", "medium"];
+
+const captionOverrides = {
+  AlwaysLikeThis: "Some habits are so completely hers that they feel timeless.",
+  BestSeatinTheHouse: "She always seemed to know exactly where the best spot was.",
+  comfyheatingpad: "A little comfort, chosen with total confidence.",
+  HerFavoriteSpot: "One of those places that never felt complete without her in it.",
+  PrissAndHerChild: "A tender little snapshot of closeness and trust.",
+  RememberWhen: "The kind of moment that instantly brings everything back.",
+  UsedToFitInMyHand: "A reminder of how long she has been loved, in every size and season.",
+  vogueshot: "Composed, self-assured, and fully aware of the camera.",
+  whyDoesSheLoveBoxes: "Because apparently every box was meant specifically for her.",
+  bestKindOfNeedy: "The sweetest kind of insistence: stay close, stay here a little longer.",
+  bliss: "A tiny pocket of contentment, caught right when it mattered.",
+  Shenanigans: "A small burst of personality that says everything without trying."
+};
+
+const titleOverrides = {
+  BestSeatinTheHouse: "Best Seat In the House",
+  vogueshot: "Vogue Shot"
+};
+
+const momentOverrides = {
+  PrissAndHerChild: {
+    size: "wide"
+  },
+  RememberWhen: {
+    size: "wide"
+  },
+  HerFavoriteSpot: {
+    size: "wide"
+  }
+};
+
+function getFileStem(path) {
+  const fileName = path.split("/").pop() || "";
+  return fileName.replace(/\.[^.]+$/, "");
+}
+
+function humanizeStem(stem) {
+  const withSpaces = stem
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .trim();
+
+  if (!withSpaces) {
+    return "A small moment";
+  }
+
+  return withSpaces
+    .split(/\s+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function buildCaption(stem, type) {
+  if (captionOverrides[stem]) {
+    return captionOverrides[stem];
+  }
+
+  if (type === "video") {
+    return "A short moving moment, kept alongside the photos and her purr.";
+  }
+
+  return "One more quiet snapshot to revisit whenever it feels right.";
+}
+
+function shuffleArray(items) {
+  const copy = [...items];
+
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+  }
+
+  return copy;
+}
+
+function buildMoment(path, type, size) {
+  const stem = getFileStem(path);
+  const title = titleOverrides[stem] || humanizeStem(stem);
+  const overrides = momentOverrides[stem] || {};
+
+  return {
+    type,
+    title,
+    caption: buildCaption(stem, type),
+    src: path,
+    alt: title,
+    size: overrides.size || size
+  };
+}
+
+function selectMediaMoments() {
+  const selectedImages = shuffleArray(imageAssets)
+    .slice(0, Math.min(4, imageAssets.length))
+    .map((path, index) => buildMoment(path, "image", sizePattern[index] || "medium"));
+
+  const selectedVideo = videoAssets.length > 0
+    ? [buildMoment(shuffleArray(videoAssets)[0], "video", sizePattern[selectedImages.length] || "medium")]
+    : [];
+
+  return [...selectedImages, ...selectedVideo];
+}
+
+const mediaMoments = selectMediaMoments();
+
 let isPlaying = false;
-
-// Load first track
-function loadTrack(index) {
-  const track = tracks[index];
-  document.getElementById("song-title").textContent = track.title;
-  document.getElementById("artist-name").textContent = track.artist;
-  audioPlayer.src = track.src;
-  resetIcons();
-}
-
-// Initialize
-loadTrack(currentTrackIndex);
-
-// Attempt to unmute after first user interaction
-document.body.addEventListener("touchstart", unmuteIfNeeded, { once: true });
-document.body.addEventListener("click", unmuteIfNeeded, { once: true });
-
-function unmuteIfNeeded() {
-  // If the audio is muted, unmute it so it can play with sound
-  if (audioPlayer.muted) {
-    audioPlayer.muted = false;
-  }
-}
-
-/********************
- *  Play/Pause Logic
- ********************/
-function togglePlayPause() {
-  // If user taps play, we can also unmute if needed
-  if (audioPlayer.muted) {
-    audioPlayer.muted = false;
-  }
-
-  if (isPlaying) {
-    audioPlayer.pause();
-    isPlaying = false;
-    playIcon.classList.add("active");
-    pauseIcon.classList.remove("active");
-  } else {
-    audioPlayer.play();
-    isPlaying = true;
-    playIcon.classList.remove("active");
-    pauseIcon.classList.add("active");
-  }
-}
 
 function resetIcons() {
   isPlaying = false;
@@ -95,60 +168,120 @@ function resetIcons() {
   pauseIcon.classList.remove("active");
 }
 
-/****************************
- *   Button Event Listeners
- ***************************/
+function loadAudioTrack() {
+  songTitle.textContent = audioTrack.title;
+  artistName.textContent = audioTrack.artist;
+  audioPlayer.src = audioTrack.src;
+  resetIcons();
+}
+
+function createMomentCard(moment) {
+  const card = document.createElement("article");
+  card.className = `moment-card${moment.size ? ` is-${moment.size}` : ""}`;
+
+  let mediaElement;
+  if (moment.type === "video") {
+    mediaElement = document.createElement("video");
+    mediaElement.src = moment.src;
+    mediaElement.muted = true;
+    mediaElement.loop = true;
+    mediaElement.controls = true;
+    mediaElement.playsInline = true;
+    mediaElement.preload = "metadata";
+    mediaElement.setAttribute("aria-label", moment.alt || moment.title);
+
+    const playPromise = mediaElement.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
+    }
+  } else {
+    mediaElement = document.createElement("img");
+    mediaElement.src = moment.src;
+    mediaElement.alt = moment.alt || moment.title;
+  }
+
+  mediaElement.className = "moment-card-media";
+  card.appendChild(mediaElement);
+
+  const copy = document.createElement("div");
+  copy.className = "moment-copy";
+
+  const heading = document.createElement("h2");
+  heading.textContent = moment.title;
+
+  const body = document.createElement("p");
+  body.textContent = moment.caption;
+
+  copy.appendChild(heading);
+  copy.appendChild(body);
+  card.appendChild(copy);
+
+  return card;
+}
+
+function renderGallery() {
+  mediaMoments.forEach((moment) => {
+    galleryRoot.appendChild(createMomentCard(moment));
+  });
+}
+
+document.body.addEventListener("touchstart", unmuteIfNeeded, { once: true });
+document.body.addEventListener("click", unmuteIfNeeded, { once: true });
+
+function unmuteIfNeeded() {
+  if (audioPlayer.muted) {
+    audioPlayer.muted = false;
+  }
+}
+
+function togglePlayPause() {
+  if (audioPlayer.muted) {
+    audioPlayer.muted = false;
+  }
+
+  if (isPlaying) {
+    audioPlayer.pause();
+    resetIcons();
+    return;
+  }
+
+  const playPromise = audioPlayer.play();
+  if (playPromise && typeof playPromise.then === "function") {
+    playPromise
+      .then(() => {
+        isPlaying = true;
+        playIcon.classList.remove("active");
+        pauseIcon.classList.add("active");
+      })
+      .catch(() => {
+        resetIcons();
+      });
+    return;
+  }
+
+  isPlaying = true;
+  playIcon.classList.remove("active");
+  pauseIcon.classList.add("active");
+}
+
 playPauseBtn.addEventListener("click", togglePlayPause);
 
-nextBtn.addEventListener("click", () => {
-  currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-  loadTrack(currentTrackIndex);
-  audioPlayer.play();
-  isPlaying = true;
-  playIcon.classList.remove("active");
-  pauseIcon.classList.add("active");
-});
-
-prevBtn.addEventListener("click", () => {
-  currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-  loadTrack(currentTrackIndex);
-  audioPlayer.play();
-  isPlaying = true;
-  playIcon.classList.remove("active");
-  pauseIcon.classList.add("active");
-});
-
-/****************************
- *   Seek Slider Updates
- ***************************/
-audioPlayer.addEventListener("loadedmetadata", () => {
-  seekSlider.max = Math.floor(audioPlayer.duration);
-});
-
-audioPlayer.addEventListener("timeupdate", () => {
-  seekSlider.value = Math.floor(audioPlayer.currentTime);
-});
-
-seekSlider.addEventListener("input", () => {
-  audioPlayer.currentTime = seekSlider.value;
-});
-
-/**************************************
- *   Handle End of Track Automatically
- **************************************/
 audioPlayer.addEventListener("ended", () => {
-  currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-  loadTrack(currentTrackIndex);
-  audioPlayer.play();
-  isPlaying = true;
-  playIcon.classList.remove("active");
-  pauseIcon.classList.add("active");
+  audioPlayer.currentTime = 0;
+  resetIcons();
 });
 
 audioPlayer.addEventListener("pause", () => {
   if (!audioPlayer.ended) {
-    isPlaying = false;
-    playIcon.classList.add("active");
-    pauseIcon.classList.remove("active");
+    resetIcons();
   }
 });
+
+audioPlayer.addEventListener("play", () => {
+  isPlaying = true;
+  playIcon.classList.remove("active");
+  pauseIcon.classList.add("active");
+});
+
+loadAudioTrack();
+renderGallery();
