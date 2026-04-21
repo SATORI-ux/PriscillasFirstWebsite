@@ -36,13 +36,13 @@ const audioTrack = {
 
 const imageAssets = [
   "assets/slideshow-images/AlwaysLikeThis.jpg",
-  "assets/slideshow-images/BestSeatinTheHouse.jpeg",
+  "assets/slideshow-images/BestSeatInTheHouse.jpeg",
   "assets/slideshow-images/comfyheatingpad.JPG",
   "assets/slideshow-images/HerFavoriteSpot.jpg",
   "assets/slideshow-images/PrissAndHerChild.jpeg",
   "assets/slideshow-images/RememberWhen.jpg",
   "assets/slideshow-images/UsedToFitInMyHand.jpg",
-  "assets/slideshow-images/vogueshot.JPG",
+  "assets/slideshow-images/vogueShot.JPG",
   "assets/slideshow-images/whyDoesSheLoveBoxes.JPG"
 ];
 
@@ -56,13 +56,13 @@ const sizePattern = ["large", "large", "medium", "medium", "medium"];
 
 const captionOverrides = {
   AlwaysLikeThis: "Some habits are so completely hers that they feel timeless.",
-  BestSeatinTheHouse: "She always seemed to know exactly where the best spot was.",
+  BestSeatInTheHouse: "She always seemed to know exactly where the best spot was.",
   comfyheatingpad: "A little comfort, chosen with total confidence.",
   HerFavoriteSpot: "One of those places that never felt complete without her in it.",
   PrissAndHerChild: "A tender little snapshot of closeness and trust.",
   RememberWhen: "The kind of moment that instantly brings everything back.",
   UsedToFitInMyHand: "A reminder of how long she has been loved, in every size and season.",
-  vogueshot: "Composed, self-assured, and fully aware of the camera.",
+  vogueShot: "Composed, self-assured, and fully aware of the camera.",
   whyDoesSheLoveBoxes: "Because apparently every box was meant specifically for her.",
   bestKindOfNeedy: "The sweetest kind of insistence: stay close, stay here a little longer.",
   bliss: "A tiny pocket of contentment, caught right when it mattered.",
@@ -70,8 +70,8 @@ const captionOverrides = {
 };
 
 const titleOverrides = {
-  BestSeatinTheHouse: "Best Seat In the House",
-  vogueshot: "Vogue Shot"
+  BestSeatInTheHouse: "Best Seat In the House",
+  vogueShot: "Vogue Shot"
 };
 
 const momentOverrides = {
