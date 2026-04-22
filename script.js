@@ -30,7 +30,7 @@ const galleryRoot = document.getElementById("moments-gallery");
 
 const audioTrack = {
   title: "Purr",
-  artist: "-by Priscilla Anastasia",
+  artist: "by Priscilla Anastasia",
   src: "audio/track1.mp3"
 };
 
@@ -66,7 +66,7 @@ const captionOverrides = {
   whyDoesSheLoveBoxes: "Because apparently every box was meant specifically for her.",
   bestKindOfNeedy: "She had her own gentle way of asking to be near you a little longer.",
   bliss: "One of those small, perfect moments where everything felt soft and right.",
-  Shenanigans: "A little glimpse of the mischief that made her so unmistakably herself."
+  Shenanigans: "A little of the mischief that makes her so unmistakably herself."
 };
 
 const titleOverrides = {
