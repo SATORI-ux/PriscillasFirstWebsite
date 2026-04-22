@@ -59,12 +59,12 @@ const captionOverrides = {
   BestSeatInTheHouse: "She always seemed to know exactly where the best spot was.",
   comfyheatingpad: "She had a way of settling exactly where comfort lived.",
   HerFavoriteSpot: "Some places started to feel like hers the moment she chose them.",
-  PrissAndHerChild: "A quiet little picture of the closeness she gave so easily.",
+  PrissAndHerChild: "A small peak into the closeness she gave surprisingly easily.",
   RememberWhen: "The kind of moment that instantly brings everything back.",
   UsedToFitInMyHand: "A reminder of how long she has been loved, in every size and season.",
   vogueShot: "She could look completely at home and entirely iconic at the same time.",
   whyDoesSheLoveBoxes: "Because apparently every box was meant specifically for her.",
-  bestKindOfNeedy: "She had her own gentle way of asking to be near you a little longer.",
+  bestKindOfNeedy: "She will always ensure shes pet properly, voluntary participation optional",
   bliss: "One of those small, perfect moments where everything felt soft and right.",
   Shenanigans: "A little of the mischief that makes her so unmistakably herself."
 };
