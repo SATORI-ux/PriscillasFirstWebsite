@@ -30,7 +30,7 @@ const galleryRoot = document.getElementById("moments-gallery");
 
 const audioTrack = {
   title: "Purr",
-  artist: "by Priscilla Anastasia",
+  artist: "-by Priscilla Anastasia",
   src: "audio/track1.mp3"
 };
 
