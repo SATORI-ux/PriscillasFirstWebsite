@@ -57,21 +57,22 @@ const sizePattern = ["large", "large", "medium", "medium", "medium"];
 const captionOverrides = {
   AlwaysLikeThis: "Some habits are so completely hers that they feel timeless.",
   BestSeatInTheHouse: "She always seemed to know exactly where the best spot was.",
-  comfyheatingpad: "A little comfort, chosen with total confidence.",
-  HerFavoriteSpot: "One of those places that never felt complete without her in it.",
-  PrissAndHerChild: "A tender little snapshot of closeness and trust.",
+  comfyheatingpad: "She had a way of settling exactly where comfort lived.",
+  HerFavoriteSpot: "Some places started to feel like hers the moment she chose them.",
+  PrissAndHerChild: "A quiet little picture of the closeness she gave so easily.",
   RememberWhen: "The kind of moment that instantly brings everything back.",
   UsedToFitInMyHand: "A reminder of how long she has been loved, in every size and season.",
-  vogueShot: "Composed, self-assured, and fully aware of the camera.",
+  vogueShot: "She could look completely at home and entirely iconic at the same time.",
   whyDoesSheLoveBoxes: "Because apparently every box was meant specifically for her.",
-  bestKindOfNeedy: "The sweetest kind of insistence: stay close, stay here a little longer.",
-  bliss: "A tiny pocket of contentment, caught right when it mattered.",
-  Shenanigans: "A small burst of personality that says everything without trying."
+  bestKindOfNeedy: "She had her own gentle way of asking to be near you a little longer.",
+  bliss: "One of those small, perfect moments where everything felt soft and right.",
+  Shenanigans: "A little glimpse of the mischief that made her so unmistakably herself."
 };
 
 const titleOverrides = {
   BestSeatInTheHouse: "Best Seat In the House",
-  vogueShot: "Vogue Shot"
+  vogueShot: "Vogue Shot",
+  whyDoesSheLoveBoxes: "My box?"
 };
 
 const momentOverrides = {
