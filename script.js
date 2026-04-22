@@ -29,8 +29,8 @@ const artistName = document.getElementById("artist-name");
 const galleryRoot = document.getElementById("moments-gallery");
 
 const audioTrack = {
-  title: "Her Purr",
-  artist: "Priscilla Anastasia",
+  title: "Purr",
+  artist: "by Priscilla Anastasia",
   src: "audio/track1.mp3"
 };
 
@@ -198,6 +198,8 @@ function createMomentCard(moment) {
     mediaElement = document.createElement("img");
     mediaElement.src = moment.src;
     mediaElement.alt = moment.alt || moment.title;
+    mediaElement.loading = "lazy";
+    mediaElement.decoding = "async";
   }
 
   mediaElement.className = "moment-card-media";
@@ -220,6 +222,7 @@ function createMomentCard(moment) {
 }
 
 function renderGallery() {
+  galleryRoot.textContent = "";
   mediaMoments.forEach((moment) => {
     galleryRoot.appendChild(createMomentCard(moment));
   });
